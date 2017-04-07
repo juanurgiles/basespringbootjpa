@@ -6,6 +6,8 @@
 package ec.edu.ucuenca.evirtual.controlador;
 
 import ec.edu.ucuenca.evirtual.modelado.Persona;
+import ec.edu.ucuenca.evirtual.modelado.PersonaDTO;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,5 +19,11 @@ import org.springframework.data.jpa.repository.Query;
 public interface PersonaRepository extends JpaRepository<Persona, Long> {
 
   @Query(value = "SELECT * FROM PERSONAS WHERE id = ?1", nativeQuery = true)
-  Persona buscarporid(String id);
+  Object buscarporid(String id);
+  
+  @Query(value = "SELECT * FROM PERSONAS WHERE id = ?1", nativeQuery = true)
+  List<Object> nocursadas(String id);
+  
+  @Query(value= "SELECT * FROM PERSONAS ",nativeQuery = true)
+  List<Object[]> buscartodos();
 }

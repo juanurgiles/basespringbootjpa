@@ -5,6 +5,9 @@ import ec.edu.ucuenca.evirtual.controlador.PersonaRepository;
 import java.util.List;
 
 import ec.edu.ucuenca.evirtual.modelado.Persona;
+import ec.edu.ucuenca.evirtual.modelado.PersonaDTO;
+import java.util.ArrayList;
+import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,9 +74,25 @@ public class PersonaRest {
     */
     @RequestMapping(value = "/listar", method = RequestMethod.GET)
     @ResponseBody
-    public Object listar(){
+    public List<Object> listar(){
         try {
-            return  personaRepository.buscarporid("0301490959");
+            List<Object[]> p= personaRepository.buscartodos();
+            List<Object> e = new ArrayList<>();
+            for (Object[] object : p) {
+                
+                List<Object> e1 = personaRepository.nocursadas(object[0].toString());
+                for (Object object1 : e1) {
+                    List<Object> ne = new ArrayList<>();
+                    ne.add(object[0].toString());
+                    ne.add(object[1].toString());
+                    ne.add(object[2].toString());
+                    ne.add(object1);
+                    
+                    e.add(ne);
+                }
+                //personaRepository.nocursadas(p.toString());
+            }
+           return  e;
         } catch (Exception e) {
             e.printStackTrace();
         }
