@@ -99,20 +99,6 @@ public class PersonaRest {
         return null;
     }
     
-    @RequestMapping("/custom")
-    @ResponseBody
-    public String custom(){
-        try {
-            return personaControlador.metodoPersonalizado();
-        } catch (Exception e) {
-            return "Error metodo personalizado";
-        }
-    }
-    
-    @RequestMapping("/test")
-    @ResponseBody
-    public String test() {
-        return "Test succesfully!";
-    }
+
 
 }
