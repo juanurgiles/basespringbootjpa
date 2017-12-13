@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,18 +29,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
     , @NamedQuery(name = "Persona.findById", query = "SELECT p FROM Persona p WHERE p.idPersona = :idPersona")
-    })
+})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private String idPersona;
     @Size(max = 30)
     @Column(name = "email")
-    private String email;
+    private String email; 
 
     public Persona() {
     }
@@ -62,7 +63,6 @@ public class Persona implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     @Override
     public int hashCode() {
@@ -88,5 +88,5 @@ public class Persona implements Serializable {
     public String toString() {
         return "ec.edu.ucuenca.evirtual.udecuencafacade.Persona[ idPersona=" + idPersona + " , nombre=" + email + "]";
     }
-    
+
 }
