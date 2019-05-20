@@ -1,4 +1,4 @@
-package ec.edu.ucuenca.evirtual;
+package ec.edu.tecazuay.evaluacion;
 
 
 import org.springframework.boot.SpringApplication;
